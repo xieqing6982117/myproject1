@@ -1,0 +1,192 @@
+* {margin: 0; padding: 0; border: none;}
+body {
+	background: #F1F5F9;
+}
+
+
+/*头部*/
+#top{
+	width: 960px;
+	height: 28px;
+	margin: 0 auto;
+	/*background: pink;*/
+	position: relative;
+}
+#list1{
+	width: 296px;
+	height: 28px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	
+}
+#list1 li{
+	float: left;
+	font-size: 12px;
+	line-height: 28px;
+	margin-right: 8px;
+	color: #686868;
+}
+#list1 li a{
+	color:#686868;
+}
+
+
+/*logo*/
+
+#logo{
+	width: 960px;
+	height: 70px;
+	margin: 0 auto;
+	/*background: pink;*/
+	position: relative;
+	cursor: pointer;
+}
+#logo a{
+	color: #AAAAAA;
+	font-size: 20px;
+	line-height: 70px;
+	margin-right: 32px;
+	margin-left: 12px;
+}
+.logobox{
+	width: 212px;
+	height: 35px;
+	position: absolute;
+	left: 360px;
+	top: 17px;
+}
+.logobox img{
+	width: 212px;
+	height: 35px;
+	
+}
+.iconBox{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	top: 16px;
+	right: 0;
+	
+}
+.iconBox i{
+	font-size: 30px;
+	line-height: 30px;
+	margin-left: 6px;
+	color: #272636;
+	font-weight: 100;
+}
+
+
+#magnifier{
+	position: relative;
+	width: 960px;
+	height: 500px;
+	margin: 0 auto;
+}
+#smallImg {
+	width: 400px; height: 400px; 
+	/*background: url(images/images2/1_2.jpeg) no-repeat;*/ 
+	/*background-size: cover;*/ 
+	position: absolute; 
+	left: 0; top: 0px;
+	
+}
+#smallArea {
+	width: 100px; height: 100px; 
+	background: gray;
+	position: absolute;
+	left: 0px; top: 0px;
+	display: none; /*默认隐藏小区域*/
+	opacity: 0.5;
+}
+
+#bigArea {
+	
+	overflow: hidden; 
+	width: 566px; height: 500px; 
+	background: rgba(200, 188, 100, 0.3); 
+	position: absolute; 
+	left: 402px; top: 0px;
+	display: none; /*默认隐藏大区域*/
+	z-index: 999;
+}
+#bigImg {
+	position: absolute;
+	left: 0px; top: 0; 
+}
+
+#detail_list{
+	width: 400px;
+	height: 100px;
+	position: absolute;
+	left: 0;
+	bottom: -4px;
+	/*background: red;*/
+}
+#detail_list img{
+	width: 98px;
+	height: 100px;
+}
+#detail_list li{
+	list-style: none;
+	float: left;
+}
+#smallImg img{
+	width: 400px;
+	height: 400px;
+}
+#bigArea img{
+	width: 1200px;
+	height: 1200px;
+}
+
+#detail_list_msg{
+	width: 566px; height: 500px; 
+	/*background: red;*/ 
+	position: absolute; 
+	right: 0; top: 0px;
+	text-align: center;
+	line-height: 50px;
+	
+}
+
+#detail_list_msg a{
+	text-decoration: none;
+	position: absolute;
+	left: 100px;
+	bottom: 120px;
+	width: 150px;
+	height: 30px;
+	background: black;
+	text-align: center;
+	line-height: 30px;
+	color: white;
+}
+#detail_list_msg input{
+	position: absolute;
+	left: 400px;
+	bottom: 120px;
+	width: 150px;
+	height: 30px;
+	background: black;
+	text-align: center;
+	line-height: 30px;
+	color: white;
+	
+}
+
+.active{
+	border: 1px solid black;
+}
+#foot1,#foot2,#foot3{
+	width: 920px;
+	margin: 0 auto;
+}
+#foot{margin-top: 10px;}
+
+
+
+#shoppingCar{
+	cursor: pointer;
+}

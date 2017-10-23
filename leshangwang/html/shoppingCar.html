@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.12.3.js" ></script>
+		<style>
+			*{margin: 0; padding: 0; border: none;}
+			input{outline: none;font-size: 16px;}
+			a{text-decoration: none;}
+			ul,li{list-style: none;}
+			#shoppingcar_top{
+				width: 960px;
+				height: 106px;
+				margin: 0 auto;
+			}
+			#shoppingCar_list{
+				width: 960px;
+				margin: 0 auto;
+			}
+			
+			.head{
+				width: 960px;
+				height: 16px;
+				margin: 0 auto;
+			}
+			.head div{
+				height: 16px;
+				float: left;
+				width: 160px;
+				line-height: 16px;
+				font-size: 12px;
+				
+			}
+			#shoppingCar_list li{
+				width: 960px;
+				height: 122px;
+				position: relative;
+			}
+			.img{
+				height:122px;
+				width: 92px;
+				position: absolute;
+				left: 60px;
+				top: 0;
+			}
+			.ckbox{
+				position: absolute;
+				left: 0;
+				top: 50%;
+			}
+			.reduce{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 456px;
+				top: 50%;
+			}
+			.add{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 516px;
+				top: 50%;
+			}
+			.num{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 486px;
+				top: 50%;
+				text-align: center;
+			}
+			.price{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 308px;
+				top: 50%;
+				text-align: center;
+				font-size: 14px;
+			}
+			#shoppingCar_list li a{
+				width: 60px;
+				height: 30px;
+				position: absolute;
+				right: 100px;
+				top: 50%;
+				font-size: 14px;
+				color: black;
+			}
+			.name{
+				width: 150px;
+				height: 30px;
+				position: absolute;
+				left: 152px;
+				top: 50%;
+				font-size: 14px;
+				color: black;
+			}
+			.xiaoji{
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 628px;
+				top: 50%;
+				text-align: center;
+				font-size: 14px;
+			}
+			#total{
+				height: 30px;
+				
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.12.3.js" ></script>
+		<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+		<script>
+			$(function(){
+//				var arr = $.cookie("cart");
+//				arr = JSON.parse(arr);
+//				console.log(arr);
+//				
+//				for (var i=0;i<arr.length;i++) {
+//					var obj = arr[i];
+//					//创建节点
+//					var li =  $("<li></li>").appendTo("#shoppingCar_list");
+//					$('<input class="ckbox" type="checkbox" />').appendTo(li);
+//					$('<img class="img" src="../'+obj.src+ '">').appendTo(li);
+//					$('<span class="name">'+obj.name+'</span>').appendTo(li);
+//					$('<span class="price">￥'+ obj.price +'</span>').appendTo(li);
+//					$('<input class="reduce" type="button" value="-" />').appendTo(li);
+//					$('<input class="num" type="text" value="'+ obj.num +'" />').appendTo(li);
+//					$('<input class="add" type="button" value="+" />').appendTo(li);
+//					$('<span class="xiaoji">￥'+obj.price*obj.num+'</span>').appendTo(li);
+//					$('<a class="del" href="javascript:;">删除</a>').appendTo(li);
+//				}
+
+				//获取购物车的cookie数据,并用节点显示
+				refresh();
+				function refresh() {
+					
+					var arr = $.cookie("cart");
+					if (arr) {
+						arr = JSON.parse(arr);
+						
+						//先清除旧节点
+						$("#shoppingCar_list").empty();
+						
+						//再添加新节点
+						var totalPrice = 0; //总价
+						
+						//遍历数组
+						for (var i=0; i<arr.length; i++) {
+							var obj = arr[i];
+							
+							//创建li节点
+							var li = $("<li></li>").appendTo("#list");
+							
+							//是否选中
+							if (obj.checked) {
+								$('<input class="ckbox" type="checkbox" checked="checked" />').appendTo(li);
+							}
+							else {
+								$('<input class="ckbox" type="checkbox" />').appendTo(li);
+							}
+
+							var li =  $("<li></li>").appendTo("#shoppingCar_list");
+							$('<input class="ckbox" type="checkbox" />').appendTo(li);
+							$('<img class="img" src="../'+obj.src+ '">').appendTo(li);
+							$('<span class="name">'+obj.name+'</span>').appendTo(li);
+							$('<span class="price">￥'+ obj.price +'</span>').appendTo(li);
+							$('<input class="reduce" type="button" value="-" />').appendTo(li);
+							$('<input class="num" type="text" value="'+ obj.num +'" />').appendTo(li);
+							$('<input class="add" type="button" value="+" />').appendTo(li);
+							$('<span class="xiaoji">￥'+obj.price*obj.num+'</span>').appendTo(li);
+							$('<a class="del" href="javascript:;">删除</a>').appendTo(li);
+							
+							//计算总价
+							if (obj.checked) {
+								totalPrice += obj.price * obj.num;
+							}
+						}
+						
+						//显示总价
+						$("#total").html(totalPrice);
+					}
+					else {
+						console.log("购物车还没有商品， 请先购买！");
+					}
+				}
+				
+				//+
+				$("#shoppingCar_list").on("click", ".add", function(){
+					var index = $(this).index("#shoppingCar_list .add");
+					
+					//获取cookie并修改
+					var arr = JSON.parse($.cookie("cart"));
+					var obj = arr[index];
+//					console.log(arr);
+//					console.log(obj.id);
+					obj.num++;
+//					console.log(obj.num);
+					
+					//覆盖原来的cookie
+					$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+					
+					//刷新节点数据
+					refresh();
+				})
+				
+				//-减号
+				$("#shoppingCar_list").on("click", ".reduce", function(){
+					var index = $(this).index("#shoppingCar_list .reduce");
+					
+					//获取cookie并修改
+					var arr = JSON.parse($.cookie("cart"));
+					arr[index].num--;
+					if (arr[index].num < 1) {
+						arr[index].num = 1;
+					}
+					
+					//覆盖原来的cookie
+					$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+					
+					//刷新节点数据
+					refresh();
+				})
+				
+				//删除
+				$("#shoppingCar_list").on("click", ".del", function(){
+					var index = $(this).index("#shoppingCar_list .del");
+					
+					//获取cookie并修改
+					var arr = JSON.parse($.cookie("cart"));
+					arr.splice(index, 1); //删除数组arr的第index个
+					
+					//覆盖原来的cookie
+					$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+					
+					isAllSelect();
+					
+					//刷新节点数据
+					refresh();
+				})
+				
+				//勾选
+				$("#shoppingCar_list").on("click", ".ckbox", function(){
+					var index = $(this).index("#shoppingCar_list .ckbox");
+					
+					//获取cookie并修改
+					var arr = JSON.parse($.cookie("cart"));
+					arr[index].checked = !arr[index].checked;
+					$("#shoppingCar_list .ckbox").prop("checked",true)
+					//覆盖原来的cookie
+					$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+					
+					//判断是否全选了
+					isAllSelect();
+					
+					//刷新节点数据
+					refresh();
+				})
+				
+				//判断是否全部勾选了
+				isAllSelect();
+				function isAllSelect(){
+					
+					//判断是否为undefined
+					var arr = $.cookie("cart");
+					if (!arr) {
+						return;
+					}
+					
+					var arr = JSON.parse($.cookie("cart"));
+					
+					var sum = 0;
+					for (var i=0; i<arr.length; i++) {
+						sum += arr[i].checked;
+					}
+					
+					//全选了
+					if (arr.length!=0 && sum==arr.length) {
+						$("#allSelect").prop("checked", true);
+					}
+					//未全选
+					else {
+						$("#allSelect").prop("checked", false);
+					}
+				}
+				
+				//全选
+				$("#allSelect").click(function(){
+					//判断是否为undefined
+					var arr = $.cookie("cart");
+					if (!arr) {
+						return;
+					}
+					
+					var arr = JSON.parse($.cookie("cart"));
+					for (var i=0; i<arr.length; i++) {
+						//全选
+						if ($(this).prop("checked")){
+							arr[i].checked = true;
+						}
+						//全不选
+						else {
+							arr[i].checked = false;
+						}
+					}
+					$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+					
+					//刷新
+					refresh();
+				})
+				
+				//删除选中
+				$("#delSelect").click(function(){
+					
+					//获取cookie并修改
+					var arr = JSON.parse($.cookie("cart"));
+					
+					//将未选中的商品添加到新数组newArr中，再将newArr保存到cookie
+					var newArr = [];
+					for (var i=0; i<arr.length; i++) {
+						if (!arr[i].checked) {
+							newArr.push(arr[i]);
+						}
+					}
+					
+					//覆盖原来的cookie
+					$.cookie("cart", JSON.stringify(newArr), {expires:30, path:"/"});
+					
+					isAllSelect();
+					
+					//刷新节点数据
+					refresh();
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="shoppingcar_top">
+			<img src="../img/shoppingCarImg/shoppingCar_top.png" />
+		</div>
+		<!--<table id="table">
+			<th>
+				<td>全选</td>
+				<td>价格</td>
+				<td>数量</td>
+				<td>小计</td>
+				<td>操作</td>
+			</th>
+			<tr>
+				<td>全选</td>
+				<td>价格</td>
+				<td>数量</td>
+				<td>小计</td>
+				<td>操作</td>
+			</tr>
+		</table>-->
+		
+		<div class="head">
+				<div style="width: 320px;"><input type="checkbox" / id="#allSelect">全选</div>
+				<div>价格</div>
+				<div>数量</div>
+				<div>小计</div>
+				<div>操作</div>
+				
+		</div>
+		<ul id="shoppingCar_list">
+			
+			<!--<li>
+				<input class="ckbox" type="checkbox" />
+				<img class="img" src="../img/listImg/list3_small1.jpg" /> 
+				<span class="name">单车</span>
+				<span class="price">￥1000</span>
+				<input class="reduce" type="button" value="-" />
+				<input class="num" type="text" value="1" />
+				<input class="add" type="button" value="+" />
+				<span class="xiaoji">￥1000</span>
+				<a class="del" href="javascript:;">删除</a>
+			</li>
+			<li>
+				<input class="ckbox" type="checkbox" />
+				<img class="img" src="../img/listImg/list3_small1.jpg" /> 
+				<span class="name">单车</span>
+				<span class="price">￥1000</span>
+				<input class="reduce" type="button" value="-" />
+				<input class="num" type="text" value="1" />
+				<input class="add" type="button" value="+" />
+				<span class="xiaoji">￥1000</span>
+				<a href="javascript:;">删除</a>
+			</li>-->
+		</ul>
+		<p style="width: 960px; margin: 0 auto; height: 30px; line-height: 30px;">总价：<span id="total">0</span></p>
+		
+	</body>
+</html>

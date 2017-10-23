@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../css/reset .css" />
+	<script type="text/javascript" src="../js/jquery-1.12.3.js" ></script>
+	<link rel="stylesheet" href="../css/detail.css" />
+	<script type="text/javascript" src="../js/detail.js" ></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+	<script type="text/javascript" src="../js/jquery.fly.min.js" ></script>
+	<script>
+		$(function(){
+			//获取从列表页传过来的id
+			// location.search : 参数部分， 如:?id=1002&name=lisi
+			var param = location.search.substring(1);//获取&后面的参数
+			var pid = getParams(param,"id");//获取keyde value值
+			
+			//查找参数对应的值
+			function getParams(str, name){
+				var arr = str.split("&");
+				for (var i=0; i<arr.length; i++) {
+					var str1 = arr[i]; // id=1002 
+					var arr1 = str1.split("=");
+					if (arr1[0] == name) {
+						return arr1[1];
+					}
+				}
+				return "";
+			}
+			//获取json数据
+			$.get("../json/list.json",function(data){
+				var arr = data;
+//				console.log(arr);
+				//for循环遍历数组
+				for (var i=0;i<$(arr).size();i++) {
+					var obj = arr[i];
+					if(obj.id == pid ){
+						loadUI(obj);
+						var a = obj;//要先用对象存起来
+						//点击加入购物车
+						$("#detail_list_msg a").click(function(e){
+							
+							
+							confirm("确定加入购物车？")
+							
+							var obj2 = {
+								"id":a.id,
+								"name":a.name,
+								"price":a.price,
+								"brand":a.brand,
+								"src":a.img7
+							}//获取的json数据太大  进行简化
+//							console.log(obj2);
+							//将当前点击的商品数据加入购物车（cookie）
+							var arr2 = $.cookie("cart") ? JSON.parse($.cookie("cart")) : [];
+							
+							//判断原来的购物车中是否有相同商品
+							var isExist = false;
+							for (var i=0; i<arr2.length; i++) {
+								if (arr2[i].id == obj2.id) {
+									arr2[i].num++;
+									isExist = true;
+									break;
+								}
+							}
+							if (isExist ==  false) {
+								obj2.num = 1;
+								obj2.checked = true; //是否选中， 默认选中 
+								arr2.push(obj2);
+							}
+							
+							
+							//将arr2添加到cookie中
+							$.cookie("cart", JSON.stringify(arr2), {expires:30, path:"/"});
+							console.log( $.cookie("cart") );
+						
+
+						})
+						$("#shoppingCar,#detail_list_msg input").click(function(){
+							location.href = "shoppingCar.html";
+						})
+					}
+				}
+				//封装一个加载详情页面的方法
+	
+			})
+			
+			function loadUI(obj){
+				$("#smallImg img").attr("src","../"+obj.img3);
+				$("#bigImg").attr("src","../"+obj.img3);
+				$("#detail_list li img").eq(0).attr("src","../"+obj.img7);
+				$("#detail_list li img").eq(1).attr("src","../"+obj.img8);
+				$("#detail_list li img").eq(2).attr("src","../"+obj.img9);
+				$("#detail_list li img").eq(3).attr("src","../"+obj.img10);
+				$("#detail_list_msg h2").html(obj.name);
+				$("#detail_list_msg h3").html(obj.brand);
+				$("#detail_list_msg h4").html("￥"+obj.price);
+				$("#detail_list_msg a").html("加入购物车");
+				
+//				var aa = $("<a href='javascript:;'>加入购物车</a>");
+//				$(aa).appendTo("#detail_list_msg");
+				
+				
+				$("#detail_list li img").click(function(){
+					var index = $(this).index();
+					$("#smallImg img").attr("src","../"+obj.img3);
+					$("#bigImg").attr("src","../"+obj.img3);
+					$(this).parent().addClass("active").siblings().removeClass("active");
+				})
+				$("#detail_list li img").eq(1).click(function(){
+					$("#smallImg img").attr("src","../"+obj.img4);
+					$("#bigImg").attr("src","../"+obj.img4);
+				})
+				$("#detail_list li img").eq(2).click(function(){
+					$("#smallImg img").attr("src","../"+obj.img5);
+					$("#bigImg").attr("src","../"+obj.img5);
+				})
+				$("#detail_list li img").eq(3).click(function(){
+					$("#smallImg img").attr("src","../"+obj.img6);
+					$("#bigImg").attr("src","../"+obj.img6);
+				})
+				
+			}
+			
+			
+			
+		})
+	</script>
+	<body>
+		<!--top-->
+		<div id="top">
+			<ul id="list1">
+				<li style="margin-left: 20px;">
+					欢迎来到尚品网,<a href="login.html">登陆</a>&nbsp;|
+				</li>
+				<li><a href="register.html">注册</a></li>
+				<li id="shoppingCar">
+					<i class="iconfont">&#xe600;</i>
+					购物袋(0)
+					<i class="iconfont" style="font-size: 12px;">&#xe6a3;</i>
+				</li>
+			</ul>
+		</div>
+		
+		<div id="logo">
+			<a href="#" style="color: #000000;">女士</a>
+			<a href="#">男士</a>
+			<a href="#">儿童</a>
+			<div class="logobox">
+				<img src="../img/indexImg/logo_v100.png" />
+			</div>
+			<div class="iconBox">
+				<i class="iconfont">&#xe601;</i>
+				<i class="iconfont">&#xe626;</i>
+			</div>
+		
+		<!--放大镜-->
+		<div id="magnifier">
+			<div id="smallImg">
+				<img src="" />
+				<div id="smallArea"></div>
+			</div>
+			
+			<div id="bigArea">
+				<img id="bigImg" src="" />
+			</div>
+			
+			
+			
+			<ul id="detail_list">
+				<li><img src="" / ></li>
+				<li><img src="" /></li>
+				<li><img src="" /></li>
+				<li><img src="" /></li>
+			</ul>
+			
+			
+			<div id="detail_list_msg">
+				<h2 style="font-size: 30px;font-weight: 600;"></h2>
+				<h3 style="font-size: 24px;font-weight: 600;"></h3>
+				<h4 style="font-size: 24px;font-weight: 600;"></h4>
+				<a href='javascript:;'></a>
+				<input type="button" value="进入购物车" />
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		<div id="foot">
+			<div id="foot1">
+				<img src="../img/footImg/foot1.jpg" />
+			</div>
+			<div id="foot2">
+				<img src="../img/footImg/foot2.jpg" />
+			</div>
+			<div id="foot3">
+				<img src="../img/footImg/foot3.jpg" />
+			</div>
+		</div>
+	</body>
+</html>

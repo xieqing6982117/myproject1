@@ -1,0 +1,254 @@
+#list2_2{
+	width: 8000px;
+	height: 420px;
+	background: pink;
+	margin: 0 auto;
+	margin-top: 4px;
+	/*overflow: hidden;*/
+	position: absolute;
+	left: 0;
+	top: 34px;
+}
+#list2_2 li{
+	width: 960px;
+	height: 420px;
+	float: left;
+}
+#list2_2 li img{
+	width: 960px;
+	height: 420px;
+	border: none;
+}
+.active{
+	font-weight: 600;
+	color: red;
+}
+
+
+#btn .pre{
+	position: absolute;
+	left: 0;
+	top: 50%;
+}
+
+#btn .next{
+	position: absolute;
+	right: 0;
+	top: 50%;
+}
+
+#shoes{
+	width: 960px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+#shoes h2{
+	font-weight: 600;
+}
+#shoes_list{
+	width: 960px;
+	background: pink;
+	
+}
+#shoes_list li{
+	width: 240px;
+	height: 430px;
+	float: left;
+}
+#shoes_list li div{
+	width: 240px;
+	height: 320px;
+}
+#shoes_list li div img{
+	width: 240px;
+	height: 320px;	
+}
+
+#shoes_list li p{
+	font-size: 14px;
+	line-height: 30px;
+	text-align: center;
+}
+#shoes_list li span{
+	display: block;
+	width: 240px;
+	height: 30px;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+	line-height: 30px;
+}
+#shoes_list li span i{
+	color: red;
+	margin-right: 6px;
+}
+#foot{
+	width: 960px;
+	margin: 0 auto;
+}
+/*头部*/
+#top{
+	width: 960px;
+	height: 28px;
+	margin: 0 auto;
+	/*background: pink;*/
+	position: relative;
+}
+#list1{
+	width: 296px;
+	height: 28px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	
+}
+#list1 li{
+	float: left;
+	font-size: 12px;
+	line-height: 28px;
+	margin-right: 8px;
+	color: #686868;
+}
+#list1 li a{
+	color:#686868;
+}
+
+
+/*logo*/
+
+#logo{
+	width: 960px;
+	height: 70px;
+	margin: 0 auto;
+	/*background: pink;*/
+	position: relative;
+	cursor: pointer;
+}
+#logo a{
+	color: #AAAAAA;
+	font-size: 20px;
+	line-height: 70px;
+	margin-right: 32px;
+	margin-left: 12px;
+}
+.logobox{
+	width: 212px;
+	height: 35px;
+	position: absolute;
+	left: 360px;
+	top: 17px;
+}
+.logobox img{
+	width: 212px;
+	height: 35px;
+	
+}
+.iconBox{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	top: 16px;
+	right: 0;
+	
+}
+.iconBox i{
+	font-size: 30px;
+	line-height: 30px;
+	margin-left: 6px;
+	color: #272636;
+	font-weight: 100;
+}
+/*侧边栏*/
+
+body{
+	position: relative;
+}
+#sidebar{
+	width: 36px;
+	height: 210px;
+	position: fixed;
+	right: 40px;
+	top: 40px;
+	/*background: red;*/
+}
+
+#sidebar_list{
+	width: 36px;
+	height: 210px;
+	z-index: 9999;
+}
+#sidebar_list li{
+	width: 36px;
+	height: 50px;
+	border-top: 1px solid black;
+	font-size: 14px;
+	line-height: 25px;
+	text-align: center;
+	color: blue;
+	cursor: pointer;
+}
+#sidebar_list .boder{
+	border-bottom: 1px solid black;
+}
+#sidebar_list li img{
+	display: block;
+	width: 30px;
+	height: 50px;
+	margin: 3px;
+}
+
+
+#weixin{
+	position: absolute;
+	top: 50px;
+	left: -140px;
+	display: none;	
+}
+#app{
+	position: absolute;
+	top: 102px;
+	left: -140px;
+	display: none;	
+}
+
+.list2_con{
+	height: 420px;
+	width: 100%;
+	background: #F6F6F6;
+	position: absolute;
+	left: 0;
+	bottom: -420px;
+	display: none;
+	
+}
+
+.list2_con img{
+	
+	display: block;
+	width: 960px;
+	height: 420px;
+	margin: 0 auto;
+}	
+.show{
+	display: block;
+	z-index: 1000;
+}
+#list2{
+	width: 960px;
+	height: 32px;
+	margin: 0 auto;
+	cursor: pointer;
+	border-bottom: 2px solid black;
+}
+
+#list2 li{
+	float: left;
+	width: 108px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 30px;
+	padding-left: 12px;
+}
+#list2 li:hover{
+	font-weight: 600;
+}

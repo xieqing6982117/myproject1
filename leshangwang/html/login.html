@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.12.3.js" ></script>
+		<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+		<link rel="stylesheet" href="../css/login.css" />
+		<script>
+			$(function(){
+				var name = $.cookie("user");
+				var pwd = $.cookie("psd");
+				$(".p2 input").val(name);
+				$(".p3 input").val(pwd);
+				
+
+				console.log(name);
+				console.log(pwd);
+				$(".p5 input").click(function(){
+					var userName = $(".p2 input").val();
+					var passWord =  $(".p3 input").val();
+					$.post("http://localhost/leshangwang/json/login.php",{username:userName,password:passWord},function(data){
+//						console.log(data);
+						var obj = JSON.parse(data);
+						$(this).css({background:"blue"});
+						alert(obj.msg);
+						location.href = "../index.html";
+						if($(".p4 input").prop("checked")==true){
+							$.cookie("user", userName, {expires:30, path:"/"});
+							$.cookie("psd", passWord, {expires:30, path:"/"});				
+						}
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="logo">
+			<div class="logobox">
+				<img src="../img/indexImg/logo_v100.png" />
+			</div>
+		</div>
+		<div id="tip">
+			<div class="tipBox">
+				依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！ 将更有利于保护您的个人隐私。
+			</div>
+		</div>
+		<form id="login">
+			<h2>账户登陆</h2>
+			<div id="login_left">
+				<p class="p1">
+					<label><input name="check" type="radio" value="" checked="checked" />账号密码登陆 </label> 
+					<label><input name="check" type="radio" value="" / id="aa">动态密码登陆 </label>
+				</p>
+				<p class="p2"><input type="text" placeholder="请输入手机号码/邮箱" /></p>
+				<p class="p3"><input type="password" placeholder="请输入密码" /></p>
+				<p class="p4"><label><input type="checkbox" />记住我</label></p>
+				<p class="p5"> <input type="button" value="登陆"/></p>
+			</div>
+			<div id="login_right">
+				<div id="login_right_top">
+					<p>没有尚品网账号？</p>
+					<a href="register.html">注册新会员</a>
+					<img src="../img/loginImg/arrow.jpg" />
+				</div>
+				<div id="login_right_buttom">
+					<img src="../img/loginImg/login_right_bottom.jpg" />
+				</div>
+			</div>
+		</form>
+		<div id="login_foot">
+			<img src="../img/loginImg/login_foot.jpg" />
+		</div>
+	</body>
+</html>

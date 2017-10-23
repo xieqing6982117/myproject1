@@ -1,0 +1,36 @@
+[
+	
+	{
+		"id": 101,
+		"img": "img/navImg/1.png"
+	}, 
+	{
+		"id": 102,
+		"img": "img/navImg/2.png"
+	},
+	{
+		"id": 103,
+		"img": "img/navImg/3.png"
+	}, 
+	{
+		"id": 104,
+		"img": "img/navImg/4.png"
+	},
+	{
+		"id": 105,
+		"img": "img/navImg/5.png"
+	}, 
+	{
+		"id": 106,
+		"img": "img/navImg/6.png"
+	},
+	{
+		"id": 107,
+		"img": "img/navImg/7.png"
+	}, 
+	{
+		"id": 108,
+		"img": "img/navImg/8.png"
+	}
+	
+]
