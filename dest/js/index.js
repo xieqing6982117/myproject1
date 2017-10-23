@@ -1,0 +1,1 @@
+"use strict";onload=function(){document.getElementById("list");for(var e=list.getElementsByTagName("li"),t=0;t<e.length;t++)e[t].onclick=function(){list.parentNode.removeChild(list),myPlane.fireInterval=this.value,gameEngine.init().start()}};
